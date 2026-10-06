@@ -1137,14 +1137,13 @@
                         onclick="clearSearch()"
                     >
                         Limpiar
-                    </button>
-
-                    <button
-                        class="search-button"
-                        onclick="searchReservation()"
-                    >
-                        Buscar
-                    </button>
+                <button
+    type="button"
+    class="search-button"
+    onclick="searchReservation()"
+>
+    Buscar
+</button>
 
                 </div>
 
@@ -1450,18 +1449,43 @@ function clearSearch() {
 ===================================================== */
 
 function searchReservation() {
-    const itemNumber = document.getElementById("item-number").value.trim();
 
-    if (itemNumber === "") {
+    const itemNumber = document.getElementById("item-number");
+
+    if (!itemNumber) {
+        alert("ERROR: No se encontró el campo item-number.");
+        return;
+    }
+
+    const reservationNumber = itemNumber.value.trim();
+
+    alert("Número ingresado: " + reservationNumber);
+
+    if (reservationNumber === "") {
         alert("Ingresa el número de ítem para realizar la búsqueda.");
         return;
     }
 
-    if (itemNumber === "917872354733760401") {
-        document.getElementById("reservation-result").style.display = "block";
+    if (reservationNumber === "917872354733760401") {
+
+        const result = document.getElementById("reservation-result");
+
+        if (!result) {
+            alert("ERROR: No se encontró reservation-result.");
+            return;
+        }
+
+        result.style.display = "block";
+
     } else {
-        alert("No se encontró ninguna reserva con el número de ítem ingresado.");
-        document.getElementById("reservation-result").style.display = "none";
+
+        alert("El número ingresado no coincide con la reserva de prueba.");
+
+        const result = document.getElementById("reservation-result");
+
+        if (result) {
+            result.style.display = "none";
+        }
     }
 }
     /* =====================================================
