@@ -1140,11 +1140,13 @@
                 <button
     type="button"
     class="search-button"
-    onclick="searchReservation()"
+<button
+    type="button"
+    class="search-button"
+    onclick="searchReservation(); return false;"
 >
     Buscar
 </button>
-
                 </div>
 
 
@@ -1450,41 +1452,28 @@ function clearSearch() {
 
 function searchReservation() {
 
-    const itemNumber = document.getElementById("item-number");
+    const reservationNumber = document
+        .getElementById("item-number")
+        .value
+        .trim();
 
-    if (!itemNumber) {
-        alert("ERROR: No se encontró el campo item-number.");
-        return;
+    if (reservationNumber === "917872354733760401") {
+
+        alert("RESERVA ENCONTRADA");
+
+        document.getElementById("reservation-result").style.display = "block";
+
+    } else if (reservationNumber === "") {
+
+        alert("Ingresa el número de ítem para realizar la búsqueda.");
+
+    } else {
+
+        alert("No se encontró ninguna reserva con el número ingresado.");
+
     }
 
-    const reservationNumber = itemNumber.value.trim();
-
-    alert("Número ingresado: " + reservationNumber);
-
-if (reservationNumber === "917872354733760401") {
-
-    const result = document.getElementById("reservation-result");
-
-    if (!result) {
-        alert("ERROR: No se encontró reservation-result.");
-        return;
-    }
-
-    result.style.display = "block";
-    result.style.visibility = "visible";
-    result.style.opacity = "1";
-
-    alert("RESERVA ENCONTRADA");
-} else {
-
-        alert("El número ingresado no coincide con la reserva de prueba.");
-
-        const result = document.getElementById("reservation-result");
-
-        if (result) {
-            result.style.display = "none";
-        }
-    }
+    return false;
 }
     /* =====================================================
    GENERAR FECHA ALEATORIA
