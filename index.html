@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PKFARE - Simulador</title>
+    <title>PKFARE - Simulador de práctica</title>
 
     <style>
 
@@ -62,7 +63,7 @@
             font-size: 12px;
         }
 
-        .login-box input:first-child {
+        .login-box input:first-of-type {
             border-bottom: 1px solid #ddd;
         }
 
@@ -70,15 +71,18 @@
             width: 100%;
             height: 42px;
             margin-top: 14px;
+
             border: none;
             border-radius: 2px;
+
             background: #32dfb1;
             color: white;
+
             cursor: pointer;
         }
 
         .login-button:hover {
-            opacity: 0.9;
+            opacity: .9;
         }
 
         #login-message {
@@ -95,14 +99,145 @@
             display: none;
             width: 100%;
             min-height: 100vh;
-            background: #eeeeee;
+            position: relative;
+            overflow: hidden;
         }
+
+
+        /* Imagen de fondo */
 
         .platform-image {
             width: 100%;
             min-height: 100vh;
+
             object-fit: cover;
+
             display: block;
+        }
+
+
+        /* =========================
+           BARRA SUPERIOR
+        ========================= */
+
+        .top-bar {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 64px;
+
+            background: #202020;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 25px;
+
+            color: white;
+
+            z-index: 5;
+        }
+
+
+        /* Logo */
+
+        .platform-logo {
+
+            font-size: 23px;
+            font-weight: bold;
+
+            margin-right: 45px;
+
+            color: white;
+        }
+
+
+        /* Menú */
+
+        .menu {
+
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+        }
+
+        .menu-item {
+
+            height: 100%;
+
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            color: #eeeeee;
+        }
+
+        .menu-item:hover {
+
+            background: #2d2d2d;
+
+        }
+
+
+        /* Opción seleccionada */
+
+        .menu-item.active {
+
+            background: #1684e8;
+
+            color: white;
+
+        }
+
+
+        /* Espacio derecho */
+
+        .top-right {
+
+            margin-left: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            height: 100%;
+
+            gap: 25px;
+
+            font-size: 13px;
+
+        }
+
+
+        .top-icon {
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+        }
+
+        .top-icon:hover {
+
+            opacity: .7;
+
+        }
+
+
+        .user {
+
+            cursor: pointer;
+
         }
 
 
@@ -111,39 +246,49 @@
         ========================= */
 
         #advertisement {
+
             position: fixed;
 
             top: 70px;
+
             left: 50%;
 
             transform: translateX(-50%);
 
             width: 630px;
+
             height: 435px;
 
             background: white;
 
-            box-shadow: 0 5px 25px rgba(0,0,0,0.35);
+            box-shadow:
+                0 5px 25px rgba(0,0,0,.35);
 
             z-index: 10;
+
         }
 
         .advertisement-image {
+
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
         }
 
-        /* X roja */
+
+        /* Botón X */
 
         .close-ad {
+
             position: absolute;
 
             top: 0;
             right: 0;
 
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
 
             border: none;
 
@@ -153,51 +298,31 @@
 
             font-size: 20px;
 
-            line-height: 28px;
+            line-height: 30px;
 
             cursor: pointer;
 
             z-index: 20;
+
         }
 
         .close-ad:hover {
+
             background: #d83232;
-        }
 
-
-        /* =========================
-           MENSAJE DE CIERRE
-        ========================= */
-
-        #closed-message {
-            display: none;
-
-            position: fixed;
-
-            top: 50%;
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            background: white;
-
-            padding: 30px 50px;
-
-            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
-
-            font-size: 18px;
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-<!-- ==================================
+<!-- =========================
      LOGIN
-================================== -->
+========================= -->
 
 <div id="login">
 
@@ -207,7 +332,9 @@
             PKFARE
         </div>
 
-        <h1>Bienvenido de nuevo</h1>
+        <h1>
+            Bienvenido de nuevo
+        </h1>
 
         <input
             type="text"
@@ -236,26 +363,93 @@
 
 
 
-<!-- ==================================
+<!-- =========================
      PLATAFORMA
-================================== -->
+========================= -->
 
 <div id="platform">
+
+
+    <!-- Imagen actual -->
 
     <img
         src="inicio-pkfare.png"
         class="platform-image"
     >
 
+
+    <!-- =========================
+         BARRA SUPERIOR REAL
+    ========================= -->
+
+    <div class="top-bar">
+
+
+        <!-- Logo -->
+
+        <div class="platform-logo">
+            PKFARE
+        </div>
+
+
+        <!-- Menú -->
+
+        <div class="menu">
+
+            <div
+                class="menu-item active"
+                onclick="selectMenu(this)"
+            >
+                Vuelos
+            </div>
+
+            <div
+                class="menu-item"
+                onclick="selectMenu(this)"
+            >
+                Centro de pedidos
+            </div>
+
+        </div>
+
+
+        <!-- Parte derecha -->
+
+        <div class="top-right">
+
+            <div class="top-icon">
+                USD
+            </div>
+
+            <div class="top-icon">
+                ?
+            </div>
+
+            <div class="top-icon">
+                🔔
+            </div>
+
+            <div class="user">
+                agente.prueba
+            </div>
+
+        </div>
+
+    </div>
+
+
 </div>
 
 
 
-<!-- ==================================
+<!-- =========================
      ANUNCIO
-================================== -->
+========================= -->
 
-<div id="advertisement">
+<div
+    id="advertisement"
+    style="display:none;"
+>
 
     <img
         src="inicio-pkfare.png"
@@ -273,75 +467,85 @@
 
 
 
-<!-- ==================================
-     MENSAJE
-================================== -->
-
-<div id="closed-message">
-
-    Anuncio cerrado correctamente.
-
-</div>
-
-
-
 <script>
 
-    function login() {
 
-        const username =
-            document.getElementById("username").value;
+/* =========================
+   INICIAR SESIÓN
+========================= */
 
-        const password =
-            document.getElementById("password").value;
+function login() {
 
-        const message =
-            document.getElementById("login-message");
+    const username =
+        document.getElementById("username").value;
 
+    const password =
+        document.getElementById("password").value;
 
-        if (
-            username === "agente.prueba" &&
-            password === "123456"
-        ) {
-
-            /* Ocultar login */
-
-            document.getElementById("login").style.display =
-                "none";
+    const message =
+        document.getElementById("login-message");
 
 
-            /* Mostrar plataforma */
+    if (
+        username === "agente.prueba" &&
+        password === "123456"
+    ) {
 
-            document.getElementById("platform").style.display =
-                "block";
-
-
-            /* Mostrar anuncio */
-
-            document.getElementById("advertisement").style.display =
-                "block";
-
-
-        } else {
-
-            message.innerHTML =
-                "✕ Usuario o contraseña incorrectos";
-
-        }
-
-    }
-
-
-
-    function closeAdvertisement() {
-
-        document.getElementById("advertisement").style.display =
+        document.getElementById("login").style.display =
             "none";
 
+        document.getElementById("platform").style.display =
+            "block";
+
+        document.getElementById("advertisement").style.display =
+            "block";
+
+    } else {
+
+        message.innerHTML =
+            "✕ Usuario o contraseña incorrectos";
+
     }
+
+}
+
+
+/* =========================
+   CERRAR ANUNCIO
+========================= */
+
+function closeAdvertisement() {
+
+    document.getElementById("advertisement").style.display =
+        "none";
+
+}
+
+
+/* =========================
+   MENÚ
+========================= */
+
+function selectMenu(element) {
+
+    const menuItems =
+        document.querySelectorAll(".menu-item");
+
+
+    menuItems.forEach(function(item) {
+
+        item.classList.remove("active");
+
+    });
+
+
+    element.classList.add("active");
+
+}
 
 </script>
 
 
 </body>
+
 </html>
