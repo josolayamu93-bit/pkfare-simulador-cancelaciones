@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PKFARE - Simulador</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -13,106 +15,65 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+            background: #eeeeee;
+        }
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        #login {
             min-height: 100vh;
-            color: white;
-            background: linear-gradient(110deg, #3f6ff0, #35a9dc);
-        }
-
-        /* Barra superior */
-        .topbar {
-            width: 100%;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 28px;
-        }
-
-        /* Logo */
-        .logo {
-            font-size: 21px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            font-size: 12px;
-            display: block;
-            font-weight: normal;
-            letter-spacing: 0;
-            margin-top: -3px;
-        }
-
-        /* Menú superior */
-        .menu {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-            font-size: 12px;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.95;
-        }
-
-        .menu .register {
-            border: 1px solid rgba(255,255,255,0.35);
-            padding: 8px 14px;
-            border-radius: 3px;
-        }
-
-        /* Contenedor central */
-        .login-container {
-            width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 45px;
+            align-items: center;
+
+            background: linear-gradient(
+                110deg,
+                #3f6ff0,
+                #35a9dc
+            );
         }
 
         .login-box {
             width: 320px;
             text-align: center;
+            color: white;
+        }
+
+        .logo-login {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 40px;
         }
 
         .login-box h1 {
             font-size: 21px;
             font-weight: normal;
-            margin-bottom: 26px;
+            margin-bottom: 25px;
         }
 
-        /* Campos */
-        .fields {
-            background: white;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .fields input {
+        .login-box input {
             width: 100%;
             height: 42px;
             border: none;
-            border-bottom: 1px solid #eeeeee;
-            padding: 0 10px;
-            font-size: 11px;
+            padding: 10px;
             outline: none;
+            font-size: 12px;
         }
 
-        .fields input::placeholder {
-            color: #b5b5b5;
+        .login-box input:first-child {
+            border-bottom: 1px solid #ddd;
         }
 
-        /* Botón */
         .login-button {
             width: 100%;
             height: 42px;
-            margin-top: 13px;
+            margin-top: 14px;
             border: none;
             border-radius: 2px;
-            background: #32e0b2;
+            background: #32dfb1;
             color: white;
-            font-size: 12px;
             cursor: pointer;
         }
 
@@ -120,158 +81,267 @@
             opacity: 0.9;
         }
 
-        /* Enlaces */
-        .forgot {
-            margin-top: 12px;
-            font-size: 10px;
-        }
-
-        .register-text {
-            margin-top: 18px;
-            font-size: 11px;
-        }
-
-        .login-box a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Mensaje */
-        #mensaje {
-            display: none;
+        #login-message {
             margin-top: 15px;
-            font-size: 11px;
-            background: rgba(0,0,0,0.15);
-            padding: 9px;
-            border-radius: 3px;
+            font-size: 12px;
         }
 
-        /* Pie de página */
-        .footer {
-            position: fixed;
-            bottom: 20px;
+
+        /* =========================
+           PLATAFORMA
+        ========================= */
+
+        #platform {
+            display: none;
             width: 100%;
-            text-align: center;
-            font-size: 9px;
-            opacity: 0.9;
+            min-height: 100vh;
+            background: #eeeeee;
         }
 
-        .footer .links {
-            margin-bottom: 8px;
+        .platform-image {
+            width: 100%;
+            min-height: 100vh;
+            object-fit: cover;
+            display: block;
         }
 
-        .footer a {
+
+        /* =========================
+           ANUNCIO
+        ========================= */
+
+        #advertisement {
+            position: fixed;
+
+            top: 70px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 630px;
+            height: 435px;
+
+            background: white;
+
+            box-shadow: 0 5px 25px rgba(0,0,0,0.35);
+
+            z-index: 10;
+        }
+
+        .advertisement-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* X roja */
+
+        .close-ad {
+            position: absolute;
+
+            top: 0;
+            right: 0;
+
+            width: 28px;
+            height: 28px;
+
+            border: none;
+
+            background: #f04444;
+
             color: white;
-            text-decoration: none;
-            margin: 0 5px;
+
+            font-size: 20px;
+
+            line-height: 28px;
+
+            cursor: pointer;
+
+            z-index: 20;
         }
+
+        .close-ad:hover {
+            background: #d83232;
+        }
+
+
+        /* =========================
+           MENSAJE DE CIERRE
+        ========================= */
+
+        #closed-message {
+            display: none;
+
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            background: white;
+
+            padding: 30px 50px;
+
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+
+            font-size: 18px;
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- Barra superior -->
-    <div class="topbar">
 
-        <div class="logo">
+<!-- ==================================
+     LOGIN
+================================== -->
+
+<div id="login">
+
+    <div class="login-box">
+
+        <div class="logo-login">
             PKFARE
-            <span>Airline Global Fare</span>
         </div>
 
-        <div class="menu">
-            <a href="#">Iniciar sesión</a>
-            <a href="#">Regístrese como proveedor</a>
-            <a href="#" class="register">Regístrese como comprador</a>
-        </div>
+        <h1>Bienvenido de nuevo</h1>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Nombre de usuario / Correo electrónico"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+        >
+
+        <button
+            class="login-button"
+            onclick="login()"
+        >
+            Iniciar sesión
+        </button>
+
+        <div id="login-message"></div>
 
     </div>
 
-
-    <!-- Formulario -->
-    <div class="login-container">
-
-        <div class="login-box">
-
-            <h1>Bienvenido de nuevo</h1>
-
-            <div class="fields">
-
-                <input
-                    type="text"
-                    id="usuario"
-                    placeholder="Nombre de usuario / Correo electrónico"
-                >
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Contraseña"
-                >
-
-            </div>
-
-            <button class="login-button" onclick="iniciarSesion()">
-                Iniciar sesión
-            </button>
-
-            <div class="forgot">
-                <a href="#">¿Olvidó su contraseña?</a>
-            </div>
-
-            <div class="register-text">
-                <a href="#">¿No tiene una cuenta? Regístrese como comprador ›</a>
-            </div>
-
-            <div id="mensaje"></div>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <!-- Pie de página -->
-    <div class="footer">
 
-        <div class="links">
-            <a href="#">中文（简体）</a> •
-            <a href="#">English</a> •
-            <a href="#">Español</a> •
-            <a href="#">Português</a> •
-            <a href="#">Acuerdo de servicio PKFARE</a> •
-            <a href="#">Términos de privacidad</a> •
-            <a href="#">Contáctenos</a>
-        </div>
+<!-- ==================================
+     PLATAFORMA
+================================== -->
 
-        <div>
-            Shenzhen Go... International Travel Agency Co., Ltd.
-        </div>
+<div id="platform">
 
-    </div>
+    <img
+        src="inicio-pkfare.png"
+        class="platform-image"
+    >
+
+</div>
 
 
-    <!-- Funcionamiento del botón -->
-    <script>
 
-        function iniciarSesion() {
+<!-- ==================================
+     ANUNCIO
+================================== -->
 
-            const usuario = document.getElementById("usuario").value;
-            const password = document.getElementById("password").value;
-            const mensaje = document.getElementById("mensaje");
+<div id="advertisement">
 
-            if (usuario === "agente.prueba" && password === "123456") {
+    <img
+        src="inicio-pkfare.png"
+        class="advertisement-image"
+    >
 
-                mensaje.style.display = "block";
-                mensaje.innerHTML = "✓ Inicio de sesión correcto";
+    <button
+        class="close-ad"
+        onclick="closeAdvertisement()"
+    >
+        ×
+    </button>
 
-            } else {
+</div>
 
-                mensaje.style.display = "block";
-                mensaje.innerHTML = "✕ Usuario o contraseña incorrectos";
 
-            }
+
+<!-- ==================================
+     MENSAJE
+================================== -->
+
+<div id="closed-message">
+
+    Anuncio cerrado correctamente.
+
+</div>
+
+
+
+<script>
+
+    function login() {
+
+        const username =
+            document.getElementById("username").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        const message =
+            document.getElementById("login-message");
+
+
+        if (
+            username === "agente.prueba" &&
+            password === "123456"
+        ) {
+
+            /* Ocultar login */
+
+            document.getElementById("login").style.display =
+                "none";
+
+
+            /* Mostrar plataforma */
+
+            document.getElementById("platform").style.display =
+                "block";
+
+
+            /* Mostrar anuncio */
+
+            document.getElementById("advertisement").style.display =
+                "block";
+
+
+        } else {
+
+            message.innerHTML =
+                "✕ Usuario o contraseña incorrectos";
+
         }
 
-    </script>
+    }
+
+
+
+    function closeAdvertisement() {
+
+        document.getElementById("advertisement").style.display =
+            "none";
+
+    }
+
+</script>
+
 
 </body>
 </html>
