@@ -1461,23 +1461,21 @@ function searchReservation() {
 
     alert("Número ingresado: " + reservationNumber);
 
-    if (reservationNumber === "") {
-        alert("Ingresa el número de ítem para realizar la búsqueda.");
+if (reservationNumber === "917872354733760401") {
+
+    const result = document.getElementById("reservation-result");
+
+    if (!result) {
+        alert("ERROR: No se encontró reservation-result.");
         return;
     }
 
-    if (reservationNumber === "917872354733760401") {
+    result.style.display = "block";
+    result.style.visibility = "visible";
+    result.style.opacity = "1";
 
-        const result = document.getElementById("reservation-result");
-
-        if (!result) {
-            alert("ERROR: No se encontró reservation-result.");
-            return;
-        }
-
-        result.style.display = "block";
-
-    } else {
+    alert("RESERVA ENCONTRADA");
+} else {
 
         alert("El número ingresado no coincide con la reserva de prueba.");
 
