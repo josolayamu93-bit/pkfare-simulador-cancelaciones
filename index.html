@@ -927,10 +927,12 @@
                             Número del ítem
                         </label>
 
-                        <input
-                            type="text"
-                            placeholder="Ingresar número"
-                        >
+                     <input
+    type="text"
+    id="item-number"
+    placeholder="Borra primero la fecha"
+    disabled
+>
 
                     </div>
 
@@ -966,10 +968,12 @@
                             Fecha
                         </label>
 
-                        <input
-                            type="text"
-                            placeholder="DD/MM/AAAA"
-                        >
+                       <input
+    type="text"
+    id="reservation-date"
+    placeholder="DD/MM/AAAA"
+    oninput="checkDate()"
+>
 
                     </div>
 
@@ -1271,6 +1275,11 @@ function openOrders() {
     document.getElementById("orders-button")
         .classList.add("active");
 
+
+    /* Generar fecha aleatoria */
+
+    generateRandomDate();
+
 }
 
 
@@ -1305,6 +1314,90 @@ function searchReservation() {
     alert(
         "La búsqueda de reservas se habilitará en el siguiente paso."
     );
+
+}
+    /* =====================================================
+   GENERAR FECHA ALEATORIA
+===================================================== */
+
+function generateRandomDate() {
+
+    const start = new Date(2025, 0, 1);
+
+    const end = new Date(2026, 11, 31);
+
+    const randomTime =
+        start.getTime() +
+        Math.random() *
+        (end.getTime() - start.getTime());
+
+    const randomDate =
+        new Date(randomTime);
+
+
+    const day =
+        String(randomDate.getDate()).padStart(2, "0");
+
+    const month =
+        String(randomDate.getMonth() + 1).padStart(2, "0");
+
+    const year =
+        randomDate.getFullYear();
+
+
+    document.getElementById("reservation-date").value =
+        `${day}/${month}/${year}`;
+
+
+    /* Mantener Número del ítem bloqueado */
+
+    const itemNumber =
+        document.getElementById("item-number");
+
+    itemNumber.disabled = true;
+
+    itemNumber.value = "";
+
+    itemNumber.placeholder =
+        "Borra primero la fecha";
+
+}
+
+
+/* =====================================================
+   VALIDAR FECHA
+===================================================== */
+
+function checkDate() {
+
+    const dateField =
+        document.getElementById("reservation-date");
+
+    const itemNumber =
+        document.getElementById("item-number");
+
+
+    /* Si la fecha fue borrada */
+
+    if (dateField.value.trim() === "") {
+
+        itemNumber.disabled = false;
+
+        itemNumber.placeholder =
+            "Ingresar número de ítem";
+
+        itemNumber.focus();
+
+    } else {
+
+        itemNumber.disabled = true;
+
+        itemNumber.value = "";
+
+        itemNumber.placeholder =
+            "Borra primero la fecha";
+
+    }
 
 }
 
