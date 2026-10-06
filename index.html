@@ -1156,62 +1156,7 @@
                 </div>
 
 
-        <!-- RESULTADO DE LA RESERVA -->
-        <div id="reservation-result" style="display:block !important;">
-
-            <div class="result-header">
-                <button class="export-button">Exportar</button>
-                <span>Un total de 1 registro</span>
-            </div>
-
-            <div class="reservation-card">
-
-                <div class="reservation-column">
-                    <span class="result-label">Fecha de creación</span>
-                    <span class="result-value">
-                        2026-08-20 09:17:53<br>
-                        UTC-5
-                    </span>
-                </div>
-
-                <div class="reservation-column">
-                    <span class="result-label">Billete original</span>
-                    <span class="result-value">Emitido</span>
-                </div>
-
-                <div class="reservation-column">
-                    <span class="result-label">Solo ida</span>
-                    <span class="result-value">MEX-YYC WS2229</span>
-                </div>
-
-                <div class="reservation-column">
-                    <span class="result-label">Tiempo de viaje</span>
-                    <span class="result-value">
-                        2027-01-14 01:15~06:55
-                    </span>
-                </div>
-
-                <div class="reservation-column">
-                    <span class="result-label">Pasajeros / Importe</span>
-                    <span class="result-value">
-                        3&nbsp;&nbsp; 13 154.7 MXN
-                    </span>
-                </div>
-
-                <div class="reservation-number">
-                    <strong>917872354733760401</strong>
-                    <span class="copy-icon">▣</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-</div>
+        
 
 <!-- ============================================
      ANUNCIO
@@ -1457,23 +1402,162 @@ function searchReservation() {
         .value
         .trim();
 
+
+    if (reservationNumber === "") {
+
+        alert("Ingresa el número de ítem para realizar la búsqueda.");
+
+        return false;
+    }
+
+
     if (reservationNumber === "917872354733760401") {
 
         alert("RESERVA ENCONTRADA");
 
-        document.getElementById("reservation-result").style.display = "block";
 
-    } else if (reservationNumber === "") {
+        /* Crear resultado de reserva */
 
-        alert("Ingresa el número de ítem para realizar la búsqueda.");
+        let result = document.getElementById("reservation-result");
+
+
+        if (!result) {
+
+            result = document.createElement("div");
+
+            result.id = "reservation-result";
+
+            result.style.marginTop = "30px";
+
+
+            result.innerHTML = `
+
+                <div class="result-header">
+
+                    <button class="export-button">
+                        Exportar
+                    </button>
+
+                    <span>
+                        Un total de 1 registro
+                    </span>
+
+                </div>
+
+
+                <div class="reservation-card">
+
+                    <div class="reservation-column">
+
+                        <span class="result-label">
+                            Fecha de creación
+                        </span>
+
+                        <span class="result-value">
+                            2026-08-20 09:17:53<br>
+                            UTC-5
+                        </span>
+
+                    </div>
+
+
+                    <div class="reservation-column">
+
+                        <span class="result-label">
+                            Billete original
+                        </span>
+
+                        <span class="result-value">
+                            Emitido
+                        </span>
+
+                    </div>
+
+
+                    <div class="reservation-column">
+
+                        <span class="result-label">
+                            Solo ida
+                        </span>
+
+                        <span class="result-value">
+                            MEX-YYC WS2229
+                        </span>
+
+                    </div>
+
+
+                    <div class="reservation-column">
+
+                        <span class="result-label">
+                            Tiempo de viaje
+                        </span>
+
+                        <span class="result-value">
+                            2027-01-14 01:15~06:55
+                        </span>
+
+                    </div>
+
+
+                    <div class="reservation-column">
+
+                        <span class="result-label">
+                            Pasajeros / Importe
+                        </span>
+
+                        <span class="result-value">
+                            3&nbsp;&nbsp; 13 154.7 MXN
+                        </span>
+
+                    </div>
+
+
+                    <div class="reservation-number">
+
+                        <strong>
+                            917872354733760401
+                        </strong>
+
+                        <span class="copy-icon">
+                            ▣
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            /* Insertar debajo del buscador */
+
+            const searchPanel =
+                document.querySelector(".search-panel");
+
+
+            searchPanel.parentNode.insertBefore(
+                result,
+                searchPanel.nextSibling
+            );
+
+        }
+
+
+        result.style.display = "block";
+
 
     } else {
 
-        alert("No se encontró ninguna reserva con el número ingresado.");
+        alert(
+            "No se encontró ninguna reserva con el número ingresado."
+        );
 
     }
 
+
     return false;
+
 }
     /* =====================================================
    GENERAR FECHA ALEATORIA
