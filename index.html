@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKFARE - Simulador</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background: linear-gradient(110deg, #3f6ff0, #35a9dc);
+        }
+
+        /* Barra superior */
+        .topbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            font-size: 12px;
+            display: block;
+            font-weight: normal;
+            letter-spacing: 0;
+            margin-top: -3px;
+        }
+
+        /* Menú superior */
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 12px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.95;
+        }
+
+        .menu .register {
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 8px 14px;
+            border-radius: 3px;
+        }
+
+        /* Contenedor central */
+        .login-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 45px;
+        }
+
+        .login-box {
+            width: 320px;
+            text-align: center;
+        }
+
+        .login-box h1 {
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 26px;
+        }
+
+        /* Campos */
+        .fields {
+            background: white;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .fields input {
+            width: 100%;
+            height: 42px;
+            border: none;
+            border-bottom: 1px solid #eeeeee;
+            padding: 0 10px;
+            font-size: 11px;
+            outline: none;
+        }
+
+        .fields input::placeholder {
+            color: #b5b5b5;
+        }
+
+        /* Botón */
+        .login-button {
+            width: 100%;
+            height: 42px;
+            margin-top: 13px;
+            border: none;
+            border-radius: 2px;
+            background: #32e0b2;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Enlaces */
+        .forgot {
+            margin-top: 12px;
+            font-size: 10px;
+        }
+
+        .register-text {
+            margin-top: 18px;
+            font-size: 11px;
+        }
+
+        .login-box a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Mensaje */
+        #mensaje {
+            display: none;
+            margin-top: 15px;
+            font-size: 11px;
+            background: rgba(0,0,0,0.15);
+            padding: 9px;
+            border-radius: 3px;
+        }
+
+        /* Pie de página */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 9px;
+            opacity: 0.9;
+        }
+
+        .footer .links {
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <div class="topbar">
+
+        <div class="logo">
+            PKFARE
+            <span>Airline Global Fare</span>
+        </div>
+
+        <div class="menu">
+            <a href="#">Iniciar sesión</a>
+            <a href="#">Regístrese como proveedor</a>
+            <a href="#" class="register">Regístrese como comprador</a>
+        </div>
+
+    </div>
+
+
+    <!-- Formulario -->
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h1>Bienvenido de nuevo</h1>
+
+            <div class="fields">
+
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="Nombre de usuario / Correo electrónico"
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Contraseña"
+                >
+
+            </div>
+
+            <button class="login-button" onclick="iniciarSesion()">
+                Iniciar sesión
+            </button>
+
+            <div class="forgot">
+                <a href="#">¿Olvidó su contraseña?</a>
+            </div>
+
+            <div class="register-text">
+                <a href="#">¿No tiene una cuenta? Regístrese como comprador ›</a>
+            </div>
+
+            <div id="mensaje"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Pie de página -->
+    <div class="footer">
+
+        <div class="links">
+            <a href="#">中文（简体）</a> •
+            <a href="#">English</a> •
+            <a href="#">Español</a> •
+            <a href="#">Português</a> •
+            <a href="#">Acuerdo de servicio PKFARE</a> •
+            <a href="#">Términos de privacidad</a> •
+            <a href="#">Contáctenos</a>
+        </div>
+
+        <div>
+            Shenzhen Go... International Travel Agency Co., Ltd.
+        </div>
+
+    </div>
+
+
+    <!-- Funcionamiento del botón -->
+    <script>
+
+        function iniciarSesion() {
+
+            const usuario = document.getElementById("usuario").value;
+            const password = document.getElementById("password").value;
+            const mensaje = document.getElementById("mensaje");
+
+            if (usuario === "agente.prueba" && password === "123456") {
+
+                mensaje.style.display = "block";
+                mensaje.innerHTML = "✓ Inicio de sesión correcto";
+
+            } else {
+
+                mensaje.style.display = "block";
+                mensaje.innerHTML = "✕ Usuario o contraseña incorrectos";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
